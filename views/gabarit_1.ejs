@@ -55,5 +55,24 @@
 	        </div>
 	    </div>
 	</section>
+
+	<section>
+        <div class="wrapper">
+          <h1>Liste des membres</h1>
+          <div class="content">
+            <ul class="membres">
+            <% membres.forEach(membre => { %>
+              <li>
+                Nom: <%= membre.nom %><br>
+                Prénom: <%= membre.prenom %><br>
+                Téléphone: <%= membre.tel %><br>
+                Courriel: <%= membre.email %><br>
+              </li>
+            <% }) %>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
 </body>
 </html>
