@@ -1,26 +1,48 @@
 const express = require('express');
-var app = express();
-app.use(express.static('public'));
-const bodyParser= require('body-parser');
+const app = express();
+const bodyParser= require('body-parser')
 const MongoClient = require('mongodb').MongoClient // le pilote MongoDB
+app.set('view engine', 'ejs'); // générateur de template 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static('public'));
 
-/* on associe le moteur de vue au module «ejs» */
+app.set('view engine', 'ejs');
 
-app.set('view engine', 'ejs'); // générateur de template
-var util = require("util");
+app.get('/',function(req, res){
 
-app.get('/', function (req, res) {
-
-	var cursor = db.collection('adresse')
-					.find().toArray(function(err, resultat){
-						if(err) return console.log(err)
-							console.log('util = ' + util.inspect(resultat));
-
-						res.render('gabarit_1.ejs', {adresses: resultat})
-					})
+ res.render('accueil.ejs')
 })
 
-let db
+app.get('/formulaire',function(req, res){
+
+ res.render('formulaire.ejs')
+})
+
+////////////////////////////////////////////////////////////////////////////////
+
+app.get('/membres',function(req, res){
+
+var cursor = db.collection('adresse').find().toArray(function(err, resultat){
+ if (err) return console.log(err)
+ // transfert du contenu vers la vue index.ejs (renders)
+ // affiche le contenu de la BD
+ res.render('gabarit.ejs', {adresse: resultat})
+})
+})
+
+/////////////////////////////////////////////////////////////////////////////
+
+app.get('/ajouter', function (req, res) {
+ // Preparer l'output en format JSON
+ db.collection('adresse').save(req.query, (err, result) => {
+ if (err) return console.log(err)
+ console.log()
+ res.redirect('/membres')
+ })
+
+});
+
+let db // variable qui contiendra le lien sur la BD
 
 MongoClient.connect('mongodb://127.0.0.1:27017', (err, database) => {
  if (err) return console.log(err)

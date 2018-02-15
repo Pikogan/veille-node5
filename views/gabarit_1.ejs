@@ -61,12 +61,12 @@
           <h1>Liste des membres</h1>
           <div class="content">
             <ul class="membres">
-            <% membres.forEach(membre => { %>
+            <% membres.forEach(membres => { %>
               <li>
-                Nom: <%= membre.nom %><br>
-                Prénom: <%= membre.prenom %><br>
-                Téléphone: <%= membre.tel %><br>
-                Courriel: <%= membre.email %><br>
+                Nom: <%= membres.nom %><br>
+                Prénom: <%= membres.prenom %><br>
+                Téléphone: <%= membres.tel %><br>
+                Courriel: <%= membres.email %><br>
               </li>
             <% }) %>
             </ul>
