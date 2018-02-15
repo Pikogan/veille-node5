@@ -6,30 +6,25 @@
  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
- <table class="tableau">
-
- <%let noLigne = 0%>
-
- <%for(element of adresse){%>
-
- <%if(noLigne==0){%>
-
+<table class="tableau">
+ <% let noLigne = 0 %>
+ <% for(element of adresse) {%>
+ <% if (noLigne == 0) {%>
  <tr>
-<%noLigne++
-for(p in element){%>
- 			<th><%=p%></th>
-		<%}%>
- 	</tr>
- <%}%>
-
-
- <tr>
- 	<% for (p in element){%>
- <td><%=element[p]%></td>
- <%}%>
+ 	<% noLigne++
+ 		for (p in element) { %>
+ 		<td><%= p %></td>
+ 	<% } %>
  </tr>
- 
- <%}%>
+ <% } %>
+ 	
+ 	<tr>
+ 		<% for (p in element) { %>
+ 		<td><%= element[p] %></td>
+ 	<% } %>
+ </tr>
+ <% } %>
+
  </table>
 </body>
 </html>
